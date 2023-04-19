@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        a {
+            text-decoration: none;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        td {
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            margin-left: 2px;
+        }
+    </style>
+    <title>View Data</title>
+</head>
+
+<body>
+    <table border="2">
+
+    </table>
+    <br><br>
+    <button><a href="../Frontend/index.html">Back</a></button>
+    <script>
+        const get = async() => {
+            const data = await fetch('http://localhost:3000');
+            const d = await data.json();
+            content = `
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>MailId</th>
+                <th>Mobile</th>
+                <th>Gender</th>
+                <th>DOB</th>
+                <th>Qualification</th>
+                <th>Past Experience</th>
+                <th>Current Experience</th>
+                <th>Age</th>
+            </tr>`
+            d.forEach(e => {
+                content += `
+                <tr>
+                    <td>${e.id}</td>
+                    <td>${e.Name}</td>
+                    <td>${e.MailId}</td>
+                    <td>${e.Mobile}</td>
+                    <td>${e.Gender}</td>
+                    <td>${e.DOB}</td>
+                    <td>${e.Qualification}</td>
+                    <td>${e.Experience}</td>
+                    <td>${e.CExperience}</td>
+                    <td>${e.Age}</td>
+                </tr>`
+            });
+            const t = document.querySelector('table');
+            t.innerHTML = content;
+        }
+        get();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        form {
+            margin: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 2px solid black;
+            padding: 4px;
+            border-radius: 5px;
+        }
+        
+        label {
+            padding: 5px;
+            margin-left: 10px;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        g {
+            margin-left: 5px;
+        }
+    </style>
+    <title>Employee Form</title>
+</head>
+
+<body>
+    <form>
+        <h1>Employee Registration</h1>
+        <label for="Name">Name:
+            <input type="text" name="Name" placeholder="Name">
+        </label>
+        <br>
+        <label for="MailId">MailId:
+            <input type="text" name="MailId" placeholder="MailId">
+        </label>
+        <br>
+        <label for="Mobile">Mobile:
+            <input type="tel" name="Mobile" placeholder="Mobile">
+        </label>
+        <br>
+        <div name="g">
+
+            <label for="Gender">Gender:
+                <input type="radio" name="Gender" value="M">Male
+                <input type="radio" name="Gender" value="F">Female
+                <input type="radio" name="Gender" value="O">Others
+                
+            </label>
+        </div>
+        <br>
+        <label for="DOB">Date of Birth:
+            <input type="date" name="DOB" placeholder="DOB">
+        </label>
+        <br>
+        <label for="Qualification">Qualification:
+            <input type="text" name="Qualification" placeholder="Qualification">
+        </label>
+        <br>
+        <label for="Years of Experience">Years of Experience:
+            <input type="text" name="Experience" placeholder="Years of Experience">
+        </label>
+        <br>
+        <label for="Date of joining">Date of joining:
+            <input type="date" name="DOJ" placeholder="Date of joining">
+        </label>
+        <br>
+        <button type="submit">Submit</button>
+        <br>
+        <button><a href="../Frontend/data.html">View</a></button>
+    </form>
+    <script>
+        const post = async(data) => {
+            const res = await fetch('http://localhost:3000', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const postResp = await res.json();
+            console.log(postResp);
+        }
+        const form = document.querySelector('form')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            post(data);
+        })
+    </script>
+</body>
+
+</html>
